@@ -17,7 +17,7 @@ export default function TodoApp() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded-2xl shadow">
-      <h1 className="text-2xl font-bold mb-4">React Todo List</h1>
+      <h1 className="text-2xl font-bold mb-4">React Tod List</h1>
       <div className="flex mb-4">
         <input
           className="flex-1 p-2 border rounded-l"

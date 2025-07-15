@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css"
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function TodoApp() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+
+  const addTodo = () => {
+    if (input.trim() === "") return;
+    setTodos([...todos, input.trim()]);
+    setInput("");
+  };
+
+  const removeTodo = (indexToRemove) => {
+    setTodos(todos.filter((_, index) => index !== indexToRemove));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="max-w-md mx-auto mt-10 p-4 border rounded-2xl shadow">
+      <h1 className="text-2xl font-bold mb-4">React Todo List</h1>
+      <div className="flex mb-4">
+        <input
+          className="flex-1 p-2 border rounded-l"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add a new task"
+        />
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-r"
+          onClick={addTodo}
+        >
+          Add
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <ul>
+        {todos.map((todo, index) => (
+          <li
+            key={index}
+            className="flex justify-between items-center bg-gray-100 p-2 mb-2 rounded"
+          >
+            <span>{todo}</span>
+            <button
+              className="text-red-500"
+              onClick={() => removeTodo(index)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-
-export default App

@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Page() {
   return (
-    <div>hello world</div>
+    <div>setting Content</div>
   )
 }
- 

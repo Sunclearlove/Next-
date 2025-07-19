@@ -4,4 +4,5 @@ export interface Post {
   title: string
   summary: string
   created_at: string
+  tags: string[]
 }

@@ -1,15 +1,25 @@
 // components/PostCard.tsx
 import Link from 'next/link'
 import { Post } from '@/types/post'
+import CommentForm from '@/components/CommentForm'
 
 export default function PostCard({ post }: { post: Post }) {
+  console.log(post)
   return (
-    <Link href={`/post/${post.id}`}>
-      <div className="border rounded-lg p-4 mb-4 shadow hover:shadow-md transition cursor-pointer">
-        <h2 className="text-xl font-bold">{post.title}</h2>
-        <p className="text-gray-600 mt-1">{post.summary}</p>
-        <p className="text-sm text-gray-400 mt-2">{new Date(post.created_at).toLocaleDateString()}</p>
+    <div className="border rounded p-4 mb-4">
+      <Link href={`/post/${post.id}`} className="text-xl font-bold hover:underline">
+        {post.title}
+      </Link>
+      <p className="text-gray-600 mt-2">{post.summary}</p>
+
+      <div className="mt-2 flex flex-wrap gap-2">
+        {post.tags.map(tag => (
+          <Link key={tag} href={`/tag/${tag}`} className="text-sm text-blue-600 hover:underline">
+            #{tag}
+          </Link>
+        ))}
       </div>
-    </Link>
+      <CommentForm postId={post.id} />
+    </div>
   )
 }
